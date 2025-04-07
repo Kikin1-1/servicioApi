@@ -17,28 +17,23 @@
     </section>
 </body>
 <script>
-        let nom = document.getElementById('nombre');
-        let dom = document.getElementById('domicilio');
-        let eda = document.getElementById('edad');
-        let sex = document.getElementById('sexo');
-        let btnLeer = document.getElementById('btnLeer');
+        const mysql = require('mysql2');
 
-        btnLeer.addEventListener("click", leer);
+const connection = mysql.createConnection({
+  host: 'p3plmysql01.prod.phx3.secureserver.net', // ← prueba este primero
+  user: 'kikin1_1',      // o el usuario correcto que hayas creado
+  password: 'tu_contraseña',
+  database: 'patrick',
+  port: 3306
+});
 
-
-        function leer(){
-            fetch ("http://localhost:3000/2")
-            .then(response => response.json())
-            .then (data => mostrar(data))
-            .catch(error => console.log("Error en la peticion", error));
-        }
-
-        function mostrar(data){
-            nom.value = data.nombre;
-            dom.value = data.domicilio;
-            sex.value = data.sexo;
-            eda.value = data.edad;
-        }
+connection.connect(err => {
+  if (err) {
+    console.error('❌ Error de conexión:', err.message);
+  } else {
+    console.log('✅ Conexión exitosa a GoDaddy desde Railway');
+  }
+});
 
 </script>
 </html>
