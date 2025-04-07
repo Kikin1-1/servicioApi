@@ -6,6 +6,7 @@ import ejs from "ejs";
 import { fileURLToPath } from "url";
 import misRutas from "./router/index.js";
 import cors from "cors";
+import dataBase from "./module/model.js"
 
 //constantes
 
@@ -22,6 +23,13 @@ app.set("view engine","ejs");
     app.use(express.static(path.join(__dirname, "public")));
     app.use(express.urlencoded({ extended: true }));    
     app.use(express.json());
+
+
+    app.use((req,res,next) => {
+        res.setHeader("Access-Control-Allow-Origin","*");
+        res.setHeader("Access-Control-Allow-Methods","GET, POST,OPTIONS");
+        res.setHeader("Access-Control-Allow-Headers","Content-Type");
+    })
 
     const puerto = 3000;
     app.listen(puerto, () => {

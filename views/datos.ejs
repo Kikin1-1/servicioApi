@@ -1,0 +1,16 @@
+<!-- views/datos.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Datos desde MySQL</title>
+</head>
+<body>
+  <h1>Resultados:</h1>
+  <ul>
+    <% datos.forEach(row => { %>
+      <li><%= row.id %></li> <!-- Cambia "nombre_columna" por el campo real -->
+    <% }) %>
+  </ul>
+</body>
+</html>

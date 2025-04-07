@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <input type="text" id="nombre">
+        <input type="text" id = "domicilio">
+        <input type="text" id="edad">
+        <input type="text" id="sexo">
+
+        <button id="btnLeer">Leer</button>
+
+    </section>
+</body>
+<script>
+        let nom = document.getElementById('nombre');
+        let dom = document.getElementById('domicilio');
+        let eda = document.getElementById('edad');
+        let sex = document.getElementById('sexo');
+        let btnLeer = document.getElementById('btnLeer');
+
+        btnLeer.addEventListener("click", leer);
+
+
+        function leer(){
+            fetch ("http://localhost:3000/2")
+            .then(response => response.json())
+            .then (data => mostrar(data))
+            .catch(error => console.log("Error en la peticion", error));
+        }
+
+        function mostrar(data){
+            nom.value = data.nombre;
+            dom.value = data.domicilio;
+            sex.value = data.sexo;
+            eda.value = data.edad;
+        }
+
+</script>
+</html>
