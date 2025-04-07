@@ -5,16 +5,16 @@ import path from "path";
 import bodyParser from "body-parser";
 import ejs from "ejs";
 import { fileURLToPath } from "url";
+import router from "./router/index.js"; // ✅ Importación por default
 import cors from "cors";
-import misRutas from "./router/index.js"; // ✅ ya exportado por default
 
-// Obtener __dirname con ESModules
+// Constantes para usar __dirname en ESModules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Motor de vistas
+// Configuración de motor de vistas
 app.set("view engine", "ejs");
 
 // Middlewares
@@ -22,9 +22,11 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(misRutas);
 
-// Cabeceras CORS personalizadas (opcional si ya usas cors())
+// Rutas
+app.use(router);
+
+// Cabeceras CORS manuales (opcional)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
