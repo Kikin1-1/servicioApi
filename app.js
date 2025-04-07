@@ -23,16 +23,16 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Rutas
-app.use(router);
-
-// Cabeceras CORS manuales (opcional)
+// ✅ Mueve esto arriba
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+// Rutas (debe ir después)
+app.use(router);
 
 // Puerto
 const puerto = process.env.PORT || 3000;
