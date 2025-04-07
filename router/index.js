@@ -19,9 +19,9 @@ router.get("/2", (req, res) => {
     res.send(data);
 });
 
-// 🔥 Nueva ruta que consulta la base de datos
+// Vista EJS con datos desde la BD
 router.get("/datos", (req, res) => {
-    const query = "SELECT * FROM marco"; // Reemplaza "tu_tabla" por el nombre real
+    const query = "SELECT * FROM marco";
 
     db.query(query, (err, results) => {
         if (err) {
@@ -29,7 +29,21 @@ router.get("/datos", (req, res) => {
             return res.status(500).send("Error al consultar la base de datos");
         }
 
-        res.render("datos", { datos: results }); // Envia resultados a la vista
+        res.render("datos", { datos: results });
+    });
+});
+
+// 🔥 NUEVA RUTA: API que devuelve datos JSON
+router.get("/api/datos", (req, res) => {
+    const query = "SELECT * FROM marco";
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error("❌ Error al consultar la base de datos:", err);
+            return res.status(500).json({ error: "Error al consultar la base de datos" });
+        }
+
+        res.json(results); // 👈 Esto lo consumirá tu HTML con fetch()
     });
 });
 
