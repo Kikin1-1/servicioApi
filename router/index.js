@@ -46,4 +46,9 @@ router.get("/api/datos", async (req, res) => {
   }
 });
 
+router.get("/ping", (req, res) => {
+    console.log("🔔 Se accedió a /ping");
+    res.send("✅ ¡La API está viva!");
+  });
+
 export default router; // ✅ Exportación por default
