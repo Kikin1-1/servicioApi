@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 app.use(router);
 
 // Puerto
-const puerto = process.env.PORT || 3000;
+const puerto = 3000;
 
 app.listen(puerto, () => {
   console.log("✅ Iniciando el servidor en el puerto", puerto);
