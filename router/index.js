@@ -59,6 +59,7 @@ router.get("/ping", (req, res) => {
   router.post("/api/alumnos", async (req, res) => {
     try {
       const result = await alumnoDB.insertar(req.body);
+      console.error("❌ Error al insertar alumno:", err);
       res.status(201).json({ mensaje: "Alumno insertado", id: result.insertId });
     } catch (err) {
       res.status(500).json({ error: "Error al insertar alumno" });

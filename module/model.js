@@ -57,5 +57,14 @@ export const alumnoDB = {
     );
     await conn.end();
     return result;
+  },
+  insertar: async (datos) => {
+    const conn = await mysql.createConnection(config);
+    const [result] = await conn.query(
+      "INSERT INTO alumnos (matricula, nombre, domicilio, fechanac, sexo, status) VALUES (?, ?, ?, ?, ?, ?)",
+      [datos.matricula, datos.nombre, datos.domicilio, datos.fechanac, datos.sexo, datos.status]
+    );
+    await conn.end();
+    return result;
   }
 };
