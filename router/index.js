@@ -30,6 +30,7 @@ router.get("/ping", (req, res) => {
       const alumnos = await alumnoDB.listar();
       res.json(alumnos);
     } catch (err) {
+        console.error("❌ Error al listar alumnos:", err);
       res.status(500).json({ error: "Error al listar alumnos" });
     }
   });
