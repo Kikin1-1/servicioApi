@@ -1,7 +1,6 @@
 // router/index.js
 import express from "express";
 import { sumar, resta, PI, data } from "../module/libreria.js";
-import { getConnection } from "../module/model.js";
 import { alumnoDB } from "../module/model.js";
 
 const router = express.Router();
