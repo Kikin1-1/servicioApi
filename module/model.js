@@ -11,6 +11,13 @@ const config = {
 
 // 🔥 Objeto que contiene todas las funciones
 export const alumnoDB = {
+    listar: async () => {
+        const conn = await mysql.createConnection(config);
+        const [rows] = await conn.query("SELECT * FROM alumnos");
+        await conn.end();
+        return rows;
+      },
+
   buscarPorId: async (id) => {
     const conn = await mysql.createConnection(config);
     const [rows] = await conn.query("SELECT * FROM alumnos WHERE id = ?", [id]);
