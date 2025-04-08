@@ -11,12 +11,12 @@ const config = {
 
 // 🔥 Objeto que contiene todas las funciones
 export const alumnoDB = {
-    listar: async () => {
-        const conn = await mysql.createConnection(config);
-        const [rows] = await conn.query("SELECT * FROM alumnos");
-        await conn.end();
-        return rows;
-      },
+  listar: async () => {
+    const conn = await mysql.createConnection(config);
+    const [rows] = await conn.query("SELECT * FROM alumnos");
+    await conn.end();
+    return rows;
+  },
 
   buscarPorId: async (id) => {
     const conn = await mysql.createConnection(config);
@@ -42,8 +42,8 @@ export const alumnoDB = {
   actualizarPorId: async (id, datos) => {
     const conn = await mysql.createConnection(config);
     const [result] = await conn.query(
-      "UPDATE alumnos SET nombre = ?, matricula = ?, edad = ? WHERE id = ?",
-      [datos.nombre, datos.matricula, datos.edad, id]
+      "UPDATE alumnos SET matricula = ?, nombre = ?, domicilio = ?, fechanac = ?, sexo = ?, status = ? WHERE id = ?",
+      [datos.matricula, datos.nombre, datos.domicilio, datos.fechanac, datos.sexo, datos.status, id]
     );
     await conn.end();
     return result;
@@ -58,11 +58,12 @@ export const alumnoDB = {
     await conn.end();
     return result;
   },
+
   insertar: async (datos) => {
     const conn = await mysql.createConnection(config);
     const [result] = await conn.query(
-      "INSERT INTO alumnos (matricula, nombre, domicilio, fechanac, sexo, status) VALUES (?, ?, ?, ?, ?, ?)",
-      [datos.matricula, datos.nombre, datos.domicilio, datos.fechanac, datos.sexo, datos.status]
+      "INSERT INTO alumnos (id, matricula, nombre, domicilio, fechanac, sexo, status) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [datos.id, datos.matricula, datos.nombre, datos.domicilio, datos.fechanac, datos.sexo, datos.status]
     );
     await conn.end();
     return result;
